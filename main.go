@@ -14,7 +14,6 @@ import (
 	"github.com/jackc/pgx/v5"
 )
 
-// Kết nối PostgreSQL
 func connectDB() (*pgx.Conn, error) {
 	conn, err := pgx.Connect(context.Background(), "postgres://user:password@localhost:5432/payments_db")
 	if err != nil {
@@ -84,7 +83,7 @@ func preCheckout(b *gotgbot.Bot, ctx *ext.Context) error {
 	// Kiểm tra điều kiện (ví dụ: hết hàng)
 	if query.TotalAmount > 1000 {
 		_, _ = b.AnswerPreCheckoutQuery(query.Id, false, &gotgbot.AnswerPreCheckoutQueryOpts{
-			ErrorMessage: "Giá sản phẩm quá cao, vui lòng chọn sản phẩm khác.",
+			ErrorMessage: "Price product is than high , pls chose product",
 		})
 		return nil
 	}
